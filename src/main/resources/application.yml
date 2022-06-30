@@ -14,5 +14,12 @@ spring:
     console:
       path: "/h2"
       enabled: true
+cine:
+  auth:
+    jks:
+      keypass: 123456
+      storepass: 123456
+      path: keystore/cinefilos.jks
+      alias: cine
 
 
