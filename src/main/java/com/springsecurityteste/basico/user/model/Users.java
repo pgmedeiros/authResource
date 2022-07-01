@@ -1,5 +1,6 @@
 package com.springsecurityteste.basico.user.model;
 
+import com.springsecurityteste.basico.user.enums.EStatus;
 import com.springsecurityteste.basico.user.enums.ETipo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,5 +25,7 @@ public class Users {
     private String password;
     @Enumerated(EnumType.STRING)
     private ETipo tipo;
+    @Enumerated(EnumType.STRING)
+    private EStatus status;
 
 }

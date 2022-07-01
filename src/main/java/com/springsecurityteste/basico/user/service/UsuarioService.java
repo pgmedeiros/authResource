@@ -1,6 +1,7 @@
 package com.springsecurityteste.basico.user.service;
 
 import com.springsecurityteste.basico.user.dto.UsuarioDto;
+import com.springsecurityteste.basico.user.enums.EStatus;
 import com.springsecurityteste.basico.user.model.Users;
 import com.springsecurityteste.basico.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,13 @@ public class UsuarioService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
     public Users criarUsuario(UsuarioDto usuarioDto) {
         usuarioDto.setPassword(passwordEncoder.encode(usuarioDto.getPassword()));
         return repository.save(of(usuarioDto));
     }
+
+
 
     Users of(UsuarioDto usuarioDto) {
         return Users

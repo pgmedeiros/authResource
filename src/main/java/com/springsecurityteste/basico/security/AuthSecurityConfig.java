@@ -4,6 +4,7 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import com.springsecurityteste.basico.config.FalhaAuthCustom;
 import com.springsecurityteste.basico.user.model.Users;
 import com.springsecurityteste.basico.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ import org.springframework.security.oauth2.server.authorization.config.TokenSett
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import java.io.InputStream;
 import java.security.KeyStore;
@@ -52,13 +54,19 @@ public class AuthSecurityConfig {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain defaultFilterChain(HttpSecurity httpSecurity) throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(httpSecurity);
-        return httpSecurity.formLogin(Customizer.withDefaults()).build();
+        return httpSecurity.formLogin()
+                .failureHandler(authenticationFailureHandler())
+                .and()
+        .build();
     }
 
     @Bean
     public SecurityFilterChain authFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests().anyRequest().authenticated();
-        return httpSecurity.formLogin(Customizer.withDefaults()).build();
+        return httpSecurity.formLogin()
+                .failureHandler(authenticationFailureHandler())
+                .and()
+                .build();
     }
 
     @Bean
@@ -162,4 +170,8 @@ public class AuthSecurityConfig {
         return new NimbusJwtEncoder(jwkSource);
     }
 
+    @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+        return new FalhaAuthCustom();
+    }
 }
