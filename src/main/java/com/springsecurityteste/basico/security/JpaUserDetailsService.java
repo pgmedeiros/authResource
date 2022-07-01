@@ -1,7 +1,10 @@
 package com.springsecurityteste.basico.security;
 
+import com.springsecurityteste.basico.user.enums.ETipo;
 import com.springsecurityteste.basico.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 @Service
 public class JpaUserDetailsService implements UserDetailsService {
@@ -23,8 +28,11 @@ public class JpaUserDetailsService implements UserDetailsService {
         if (possivelUsuario.isEmpty()) {
             throw new UsernameNotFoundException("Usuário não foi encontrado amigo.");
         }
+
+        final var simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_" + possivelUsuario.get().getTipo());
+
         return new User(possivelUsuario.get().getUsername(),
                 possivelUsuario.get().getPassword(),
-                Arrays.asList());
+                List.of(simpleGrantedAuthority));
     }
 }

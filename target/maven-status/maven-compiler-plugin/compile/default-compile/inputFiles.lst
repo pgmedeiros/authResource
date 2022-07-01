@@ -1,0 +1,8 @@
+/home/xbrain/cinefilos/auth/src/main/java/com/springsecurityteste/basico/security/AuthSecurityConfig.java
+/home/xbrain/cinefilos/auth/src/main/java/com/springsecurityteste/basico/user/model/Users.java
+/home/xbrain/cinefilos/auth/src/main/java/com/springsecurityteste/basico/security/PasswordEncoderConfig.java
+/home/xbrain/cinefilos/auth/src/main/java/com/springsecurityteste/basico/user/enums/ETipo.java
+/home/xbrain/cinefilos/auth/src/main/java/com/springsecurityteste/basico/user/repository/UserRepository.java
+/home/xbrain/cinefilos/auth/src/main/java/com/springsecurityteste/basico/security/AuthProperties.java
+/home/xbrain/cinefilos/auth/src/main/java/com/springsecurityteste/basico/security/JpaUserDetailsService.java
+/home/xbrain/cinefilos/auth/src/main/java/com/springsecurityteste/basico/AuthApplication.java

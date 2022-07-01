@@ -1,0 +1,9 @@
+com/springsecurityteste/basico/security/AuthSecurityConfig.class
+com/springsecurityteste/basico/user/model/Users.class
+com/springsecurityteste/basico/AuthApplication.class
+com/springsecurityteste/basico/security/JpaUserDetailsService.class
+com/springsecurityteste/basico/security/AuthProperties$JksProperties.class
+com/springsecurityteste/basico/security/AuthProperties.class
+com/springsecurityteste/basico/user/enums/ETipo.class
+com/springsecurityteste/basico/security/PasswordEncoderConfig.class
+com/springsecurityteste/basico/user/repository/UserRepository.class

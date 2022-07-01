@@ -76,7 +76,7 @@ public class AuthSecurityConfig {
                     authorities.add(authority.toString());
                 }
                 context.getClaims().claim("user_id", userEntity.getId().toString());
-                context.getClaims().claim("user_fullname", "feijao");
+                context.getClaims().claim("user_username", userEntity.getUsername());
                 context.getClaims().claim("authorities", authorities);
             }
 
@@ -106,10 +106,25 @@ public class AuthSecurityConfig {
                         .build())
                 .build();
 
-        return new InMemoryRegisteredClientRepository(
-                Arrays.asList(cinefilosFront)
-        );
+        RegisteredClient resourceClient = RegisteredClient
+                .withId("2")
+                .clientId("awuser")
+                .clientSecret(passwordEncoder.encode("123456"))
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                .scope("users:read")
+                .scope("users:write")
+                .tokenSettings(TokenSettings.builder()
+                        .accessTokenTimeToLive(Duration.ofMinutes(5))
+                        .build())
+                .clientSettings(ClientSettings.builder()
+                        .requireAuthorizationConsent(false)
+                        .build())
+                .build();
 
+        return new InMemoryRegisteredClientRepository(
+                Arrays.asList(cinefilosFront, resourceClient)
+        );
     }
 
     @Bean
